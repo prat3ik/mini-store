@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "jbl-charge-4-bluetooth-speaker",
+    "name": "JBL Charge 4 Bluetooth Speaker",
+    "price": 145,
+    "category": "Audio",
+    "description": "Portable, waterproof speaker with deep bass and up to 20 hours of playtime.",
+    "emoji": "🔊"
+  },
+  {
+    "slug": "sony-wh-1000xm5-headphones",
+    "name": "Sony WH-1000XM5 Headphones",
+    "price": 349,
+    "category": "Audio",
+    "description": "Over-ear noise cancelling headphones with 30 hours of battery.",
+    "emoji": "🎧"
+  },
+  {
+    "slug": "keychron-k2-keyboard",
+    "name": "Keychron K2 Keyboard",
+    "price": 89,
+    "category": "Desk",
+    "description": "75% wireless mechanical keyboard with hot-swappable switches.",
+    "emoji": "⌨️"
+  },
+  {
+    "slug": "logitech-mx-master-3s",
+    "name": "Logitech MX Master 3S",
+    "price": 99,
+    "category": "Desk",
+    "description": "Quiet-click productivity mouse with an 8K DPI sensor.",
+    "emoji": "🖱️"
+  },
+  {
+    "slug": "anker-737-power-bank",
+    "name": "Anker 737 Power Bank",
+    "price": 129,
+    "category": "Power",
+    "description": "24,000 mAh with 140 W output. Charges a laptop at full speed.",
+    "emoji": "🔋"
+  },
+  {
+    "slug": "kindle-paperwhite",
+    "name": "Kindle Paperwhite",
+    "price": 149,
+    "category": "Reading",
+    "description": "6.8 inch glare-free display, adjustable warm light, weeks of battery.",
+    "emoji": "📖"
+  }
+]

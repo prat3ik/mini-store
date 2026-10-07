@@ -1,0 +1,9 @@
+{
+  "name": "Mini Store",
+  "tagline": "6 products. 0 databases. Built for Playwright demos.",
+  "currency": "USD",
+  "shipping": "Free",
+  "addToCartLabel": "Add to cart",
+  "placeOrderLabel": "Place order",
+  "confirmationTitle": "Your order was placed successfully"
+}

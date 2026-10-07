@@ -1,0 +1,29 @@
+{
+  "name": "mini-store",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A tiny e-commerce store for Playwright demos: static pages, a JSON product file, a localStorage cart, no database",
+  "scripts": {
+    "dev": "next dev -p 3100",
+    "build": "next build",
+    "start": "next start -p 3100",
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "report": "playwright show-report",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^16.4.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.0",
+    "@testdino/playwright": "^2.7.8",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "dotenv": "^17.0.0",
+    "typescript": "^5.0.0"
+  }
+}
