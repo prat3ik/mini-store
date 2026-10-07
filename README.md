@@ -2,6 +2,8 @@
 
 A 6-product e-commerce store built for Playwright demos, with its Playwright tests in the same repo.
 
+**Live:** https://mini-store-ebon-delta.vercel.app
+
 This is **application code**: a Next.js store you can run, deploy and break on purpose. The `tests/` folder holds the Playwright suite that checks it, streamed to [TestDino](https://testdino.com) on every run.
 
 ![Mini Store home page: 6 product cards with search](docs/mini-store.png)
@@ -60,4 +62,4 @@ Revert the edit and rerun, or update the test to match the new behaviour.
 
 ## Deploy
 
-Import the repo in Vercel with the Next.js preset. No environment variables are needed for the store itself.
+Deployed on Vercel at https://mini-store-ebon-delta.vercel.app from this repo's `main` branch, Next.js preset, no environment variables. Point the tests at it with `BASE_URL=https://mini-store-ebon-delta.vercel.app npx playwright test`.
