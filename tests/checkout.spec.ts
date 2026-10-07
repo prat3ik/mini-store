@@ -12,15 +12,15 @@ async function addSpeakerAndOpenCheckout(page: import('@playwright/test').Page) 
   await page.getByTestId('checkout').click();
 }
 
-test.describe('Checkout @checkout', () => {
-  test('checkout summary matches the cart', async ({ page }) => {
+test.describe('Checkout', { tag: '@checkout' }, () => {
+  test('Checkout summary matches the cart', async ({ page }) => {
     await addSpeakerAndOpenCheckout(page);
     await expect(page.getByTestId('page-title')).toHaveText('Checkout');
     await expect(page.getByTestId('order-summary')).toContainText(PRODUCT);
     await expect(page.getByTestId('summary-total')).toHaveText('$145');
   });
 
-  test('placing an order shows the confirmation at the listed price', async ({ page }) => {
+  test('Placing an order shows the confirmation at the listed price', async ({ page }) => {
     await addSpeakerAndOpenCheckout(page);
     await page.getByTestId('name').fill('Ada Lovelace');
     await page.getByTestId('email').fill('ada@example.com');
@@ -33,7 +33,7 @@ test.describe('Checkout @checkout', () => {
     await expect(page.getByTestId('cart-count')).toHaveText('0');
   });
 
-  test('checkout with an empty cart asks you to add something first', async ({ page }) => {
+  test('Checkout with an empty cart asks you to add something first', async ({ page }) => {
     await page.goto('/checkout');
     await expect(page.getByTestId('checkout-empty')).toBeVisible();
     await expect(page.getByTestId('place-order')).toHaveCount(0);

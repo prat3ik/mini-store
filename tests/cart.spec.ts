@@ -5,14 +5,14 @@ import { test, expect } from '@playwright/test';
 const PRODUCT = 'JBL Charge 4 Bluetooth Speaker';
 const PRODUCT_URL = '/product/jbl-charge-4-bluetooth-speaker';
 
-test.describe('Product and cart @cart', () => {
-  test('product page shows the listed price', async ({ page }) => {
+test.describe('Product and cart', { tag: '@cart' }, () => {
+  test('Product page shows the listed price', async ({ page }) => {
     await page.goto(PRODUCT_URL);
     await expect(page.getByTestId('product-name')).toHaveText(PRODUCT);
     await expect(page.getByTestId('product-price')).toHaveText('$145');
   });
 
-  test('add to cart updates the header badge', async ({ page }) => {
+  test('Add to cart updates the header badge', async ({ page }) => {
     await page.goto(PRODUCT_URL);
     await expect(page.getByTestId('cart-count')).toHaveText('0');
     await page.getByRole('button', { name: 'Add to cart' }).click();
@@ -20,7 +20,7 @@ test.describe('Product and cart @cart', () => {
     await expect(page.getByTestId('cart-count')).toHaveText('1');
   });
 
-  test('cart shows the line, free shipping and the total', async ({ page }) => {
+  test('Cart shows the line, free shipping and the total', async ({ page }) => {
     await page.goto(PRODUCT_URL);
     await page.getByTestId('add-to-cart').click();
     await page.getByTestId('nav-cart').click();
