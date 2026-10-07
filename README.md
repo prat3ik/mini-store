@@ -16,7 +16,10 @@ This is **application code**: a Next.js store you can run, deploy and break on p
 | `data/products.json` | The whole product catalog. The only "database". |
 | `data/store.json` | Store name, button labels, confirmation copy. |
 | `lib/cart.ts` | Cart in the browser's localStorage. No server state. |
-| `tests/store.spec.ts` | 5 Playwright tests that cover the shopping journey. |
+| `tests/catalog.spec.ts` | Module 1: home listing and search. 3 tests. |
+| `tests/cart.spec.ts` | Module 2: product page and cart. 3 tests. |
+| `tests/checkout.spec.ts` | Module 3: checkout and confirmation. 3 tests. |
+| `.github/workflows/playwright.yml` | Manual pipeline: pick a module, run it against the live store, stream to TestDino. |
 | `playwright.config.ts` | Starts the dev server, points tests at it, streams results to TestDino. |
 
 No database, no API, no auth. Every page is static, so it deploys to Vercel with zero configuration.
@@ -31,8 +34,15 @@ npm run dev          # http://localhost:3100
 ## Run the tests
 
 ```bash
-npx playwright test
+npx playwright test                       # all 3 modules
+npx playwright test tests/catalog.spec.ts # 1 module
 ```
+
+Each module mirrors a suite in TestDino test management (Catalog, Product and cart, Checkout), with the same 9 case titles, so automated results land next to the manual steps.
+
+## Run them from GitHub Actions
+
+Actions → **Playwright tests** → **Run workflow**. Pick a module (`all`, `catalog`, `cart`, `checkout`) and, optionally, a different store URL. The run streams to TestDino tagged with the module name. Needs the `TESTDINO_TOKEN` repository secret.
 
 The config boots the dev server if it is not already running. Every interactive element has a `data-testid`, so locators stay stable while you change the UI.
 
@@ -53,10 +63,10 @@ Each edit is 1 line and turns a known test red. Rerun, and watch TestDino classi
 
 | Edit | File | Test that fails |
 | --- | --- | --- |
-| `"addToCartLabel": "Add to bag"` | `data/store.json` | add to cart updates the header badge |
-| `"price": 155` on the JBL speaker | `data/products.json` | product page shows the listed price, checkout places an order |
-| Delete the Kindle entry | `data/products.json` | home lists all 6 products |
-| Change `confirmationTitle` | `data/store.json` | checkout places an order |
+| `"addToCartLabel": "Add to bag"` | `data/store.json` | cart: add to cart updates the header badge |
+| `"price": 155` on the JBL speaker | `data/products.json` | cart: product page shows the listed price; checkout: summary and confirmation |
+| Delete the Kindle entry | `data/products.json` | catalog: home lists all 6 products |
+| Change `confirmationTitle` | `data/store.json` | checkout: placing an order shows the confirmation |
 
 Revert the edit and rerun, or update the test to match the new behaviour.
 

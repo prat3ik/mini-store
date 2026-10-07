@@ -1,0 +1,58 @@
+name: Playwright tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      module:
+        description: Which module to run
+        type: choice
+        default: all
+        options:
+          - all
+          - catalog
+          - cart
+          - checkout
+      base_url:
+        description: Store to test against
+        type: string
+        default: https://mini-store-ebon-delta.vercel.app
+
+jobs:
+  test:
+    name: ${{ inputs.module }} against ${{ inputs.base_url }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      # Streams the run to TestDino. Set in the repo's Actions secrets.
+      TESTDINO_TOKEN: ${{ secrets.TESTDINO_TOKEN }}
+      TESTDINO_TAGS: ${{ inputs.module }}
+      BASE_URL: ${{ inputs.base_url }}
+      BROWSER_CHANNEL: chromium
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run ${{ inputs.module }} tests
+        run: |
+          if [ "${{ inputs.module }}" = "all" ]; then
+            npx playwright test
+          else
+            npx playwright test "tests/${{ inputs.module }}.spec.ts"
+          fi
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-${{ inputs.module }}
+          path: playwright-report/
+          retention-days: 7

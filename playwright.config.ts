@@ -33,12 +33,16 @@ export default defineConfig({
     locale: 'en-US',
     testIdAttribute: 'data-testid',
   },
-  webServer: {
-    command: 'npm run dev',
-    url: BASE_URL,
-    reuseExistingServer: !isCI,
-    timeout: 120_000,
-  },
+  // Boot the local store only when BASE_URL points at localhost; against the
+  // Vercel deployment (CI default) there is nothing to start.
+  webServer: BASE_URL.includes('localhost')
+    ? {
+        command: 'npm run dev',
+        url: BASE_URL,
+        reuseExistingServer: !isCI,
+        timeout: 120_000,
+      }
+    : undefined,
   projects: [
     {
       name: 'chromium',
